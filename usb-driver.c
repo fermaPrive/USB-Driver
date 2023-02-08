@@ -29,14 +29,22 @@ static void usb_disconnect(struct usb_interface *inter) {
     printk(KERN_INFO "USB drive removed\n");
 }
 
+static struct usb_driver usb_drv = {
+    .name = "usb-driver",
+    .id-table = usb_device_table,
+    .probe = usb_probe,
+    .disconnect = usb_disconnect
+};
 
 static int __init init_mod(void) {
     printk(KERN_INFO "USB Driver loaded\n");
-    return 0;
+    
+    return usb_register(&usb_drv);
 }
 
 static void __exit cleanup_mod(void) {
     printk(KERN_INFO "Remove USB Driver\n");
+    usb_deregister(&usb_drv);
 }
 
 module_init(init_mod);
