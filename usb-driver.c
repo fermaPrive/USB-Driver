@@ -31,7 +31,7 @@ static void usb_disconnect(struct usb_interface *inter) {
 
 static struct usb_driver usb_drv = {
     .name = "usb-driver",
-    .id-table = usb_device_table,
+    .id_table = usb_device_table,
     .probe = usb_probe,
     .disconnect = usb_disconnect
 };
